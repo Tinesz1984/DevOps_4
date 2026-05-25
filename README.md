@@ -15,14 +15,21 @@
 
 2. Пароль хранится прямо в коде
    
-   <img width="274" height="68" alt="image" src="https://github.com/user-attachments/assets/5ad5d66f-071a-45d2-bd18-fbf89b86c254" />
-   Проблема в том, что если файл попадет в git, а скорее всего он туда попадет, то пароль навсегда там останется, даже если его удалить (в таком случае - будет в коммитах). Никакой засекречености, заходи, бери что хочешь.
+<img width="274" height="68" alt="image" src="https://github.com/user-attachments/assets/5ad5d66f-071a-45d2-bd18-fbf89b86c254" />
+  
+Проблема в том, что если файл попадет в git, а скорее всего он туда попадет, то пароль навсегда там останется, даже если его удалить (в таком случае - будет в коммитах). Никакой засекречености, заходи, бери что хочешь.
 
-   В исправленной версии секреты вынесены в CI/CD variables, где они хранятся отдельно от кода и подставляются во время выполнения pipeline.
+В исправленной версии секреты вынесены в CI/CD variables, где они хранятся отдельно от кода и подставляются во время выполнения pipeline.
 
 3. Многократное повторение pip install
-   <img width="339" height="495" alt="image" src="https://github.com/user-attachments/assets/254f97d7-3ee9-43a4-a18d-d41b169dabb1" />
-   Медленно, неэффективно, нет cache.
+
+<img width="339" height="495" alt="image" src="https://github.com/user-attachments/assets/254f97d7-3ee9-43a4-a18d-d41b169dabb1" />
+
+Таким образом, программа тратит лишнее время на установку зависимостей, дублированию одинаковых операций, увеличению нагрузки на CI и замедлению. 
+
+Добавим общий image и централизованную установку. Тогда зависимости будут установлены один раз на job уровне, да и код стал компактнее. 
+
+<img width="290" height="95" alt="image" src="https://github.com/user-attachments/assets/b573e01e-3b2b-4ff3-8f60-7fb23000ef55" />
 
 5. allow_failure: true
    <img width="210" height="63" alt="image" src="https://github.com/user-attachments/assets/5c8436d3-2bcb-4cca-ba74-d4fefe72e96b" />
