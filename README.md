@@ -13,11 +13,14 @@
  <img width="207" height="51" alt="image" src="https://github.com/user-attachments/assets/a53b557f-89c6-4339-983c-45e420e41885" />
 
 
-3. Секреты захардкодены
+2. Пароль хранится прямо в коде
+   
    <img width="274" height="68" alt="image" src="https://github.com/user-attachments/assets/5ad5d66f-071a-45d2-bd18-fbf89b86c254" />
-   Секреты могут утеч, видны в сети и попадут в git history.
+   Проблема в том, что если файл попадет в git, а скорее всего он туда попадет, то пароль навсегда там останется, даже если его удалить (в таком случае - будет в коммитах). Никакой засекречености, заходи, бери что хочешь.
 
-4. Многократное повторение pip install
+   В исправленной версии секреты вынесены в CI/CD variables, где они хранятся отдельно от кода и подставляются во время выполнения pipeline.
+
+3. Многократное повторение pip install
    <img width="339" height="495" alt="image" src="https://github.com/user-attachments/assets/254f97d7-3ee9-43a4-a18d-d41b169dabb1" />
    Медленно, неэффективно, нет cache.
 
