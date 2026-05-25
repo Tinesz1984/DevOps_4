@@ -21,6 +21,7 @@
 
 В исправленной версии секреты вынесены в CI/CD variables, где они хранятся отдельно от кода и подставляются во время выполнения pipeline.
 
+
 3. Многократное повторение pip install
 
 <img width="339" height="495" alt="image" src="https://github.com/user-attachments/assets/254f97d7-3ee9-43a4-a18d-d41b169dabb1" />
@@ -31,18 +32,25 @@
 
 <img width="290" height="95" alt="image" src="https://github.com/user-attachments/assets/b573e01e-3b2b-4ff3-8f60-7fb23000ef55" />
 
-5. allow_failure: true
-   <img width="210" height="63" alt="image" src="https://github.com/user-attachments/assets/5c8436d3-2bcb-4cca-ba74-d4fefe72e96b" />
-   Игнорирование lint ошибок, плохой код попадет в main.
+4. Отсутствие cache для зависимостей
 
-6. Нет cache
-   Зависимости качаются заново, pipeline работает меленно
+Каждый запуск заново скачивает зависимости, pip каждый раз тратит время на загрузку пакетов, увеличивается нагрузка на сеть и PyPI, pipeline замедляется. 
 
-7. Нет артефактов
-   Не сохраняются результаты тестов, нет отчетов.
+Добавим параметры в chace и variables. Теперь зависимости кэшируются между запусками, повторные pipeline используют уже скачанные пакеты
+В итоге CI будет работать быстрее, особенно на больших проектах. 
 
-8. Нет разделения environments
-   Небезопасный деплой, нет staging, нет контроля.
+<img width="357" height="126" alt="image" src="https://github.com/user-attachments/assets/e7ed32c4-fe05-4101-972e-b8ae9d5922ac" />
+
+
+5. allow_failure: true~ for lint
+   
+<img width="210" height="63" alt="image" src="https://github.com/user-attachments/assets/5c8436d3-2bcb-4cca-ba74-d4fefe72e96b" />
+lint ошибки не ломают pipeline, плохой код может попасть в main, нарушается качество кода.
+
+В хорошем файле этого нет. 
+
+<img width="222" height="112" alt="image" src="https://github.com/user-attachments/assets/fca736dd-c9ce-4ddc-a2d0-5c21174ab514" />
+Тут ошибки стиля блокируют merge, а разрабы вынуждены фиксить код сразу. Как итог lint не для галочки, а для реального контроля ошибок. 
 
 
 Исправления: 
