@@ -45,12 +45,20 @@
 5. allow_failure: true~ for lint
    
 <img width="210" height="63" alt="image" src="https://github.com/user-attachments/assets/5c8436d3-2bcb-4cca-ba74-d4fefe72e96b" />
+
 lint ошибки не ломают pipeline, плохой код может попасть в main, нарушается качество кода.
 
 В хорошем файле этого нет. 
 
 <img width="222" height="112" alt="image" src="https://github.com/user-attachments/assets/fca736dd-c9ce-4ddc-a2d0-5c21174ab514" />
+
 Тут ошибки стиля блокируют merge, а разрабы вынуждены фиксить код сразу. Как итог lint не для галочки, а для реального контроля ошибок. 
+
+---
+
+Реализуем работу с секретами 
+
+Создадим Dockerfile и Dockercompose файлы. 
 
 
 
