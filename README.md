@@ -153,5 +153,7 @@ security_scan:
 
 <img width="868" height="326" alt="image" src="https://github.com/user-attachments/assets/3e769c0e-d984-4a22-a74e-bedfdd96f2c0" />
 
+---
+На факультете по дисциплине Pyhton нам необходимо защитить итоговый проект. Так вот, я его залила на гитлаб, контейнеризовала и написала небольшой ci/cd. И только после этого смогла понять до конца docker compose. Если интересно - https://gitlab.com/tinesz1984-group/habitquest. 
 
 
