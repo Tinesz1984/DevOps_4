@@ -1,0 +1,58 @@
+stages:
+  - install
+  - lint
+  - security
+  - test
+  - build
+  - deploy
+
+image: python:3.11
+
+cache:
+  paths:
+    - .pip-cache/
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+
+before_script:
+  - python --version
+  - pip install --upgrade pip
+  - pip install -r requirements.txt
+
+install:
+  stage: install
+  script:
+    - echo "Dependencies installed"
+
+lint:
+  stage: lint
+  script:
+    - flake8 .
+
+security_scan:
+  stage: security
+  script:
+    - bandit -r .
+
+unit_tests:
+  stage: test
+  script:
+    - pytest --junitxml=report.xml
+  artifacts:
+    reports:
+      junit: report.xml
+
+build:
+  stage: build
+  script:
+    - echo "Build successful"
+
+production_deploy:
+  stage: deploy
+  environment:
+    name: production
+  script:
+    - echo "Deploy successful"
+  only:
+    - main

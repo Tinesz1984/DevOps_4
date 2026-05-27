@@ -1,0 +1,50 @@
+stages:
+  - install
+  - lint
+  - test
+  - build
+  - deploy
+
+variables:
+  PASSWORD: "admin123"
+  SECRET_KEY: "super-secret-key"
+
+install:
+  stage: install
+  image: python:latest
+  script:
+    - pip install -r requirements.txt
+
+lint:
+  stage: lint
+  image: python:latest
+  script:
+    - pip install -r requirements.txt
+    - flake8 .
+  allow_failure: true
+security:
+  stage: test
+  image: python:latest
+  script:
+    - pip install -r requirements.txt
+    - bandit -r .
+
+unit_tests:
+  stage: test
+  image: python:latest
+  script:
+    - pip install -r requirements.txt
+    - pytest
+
+build:
+  stage: build
+  image: docker:latest
+  script:
+    - echo "Building app"
+    
+production_deploy:
+  stage: deploy
+  script:
+    - echo "Deploying with password $PASSWORD"
+  only:
+    - main
